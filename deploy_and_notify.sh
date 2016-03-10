@@ -4,12 +4,12 @@ set -x
 export SHA1=`echo ${CIRCLE_SHA1} | cut -c1-7`
 export ENV=`echo $1 | rev | cut -d \- -f1 | rev`
 
-if [ $1 -eq 'staging' ]; then
+if [ $1 == 'staging' ]; then
     export S3_BUCKET=$S3_BUCKET_STAGING
     export LAMBDA_EXEC_ROLE=$LAMBDA_EXEC_ROLE_STAGING
     python src/environment.py staging
     pushd src && python install.py && popd
-elif [ $1 -eq 'production' ]; then
+elif [ $1 == 'production' ]; then
     aws sts assume-role --role-arn $STS_ROLE_PRODUCTION --role-session-name circleci > /tmp/sts.json; export AWS_ACCESS_KEY=`cat /tmp/sts.json | jq -r .Credentials.AccessKeyId`; export AWS_SECRET_KEY=`cat /tmp/sts.json | jq -r .Credentials.SecretAccessKey`; export AWS_SESSION_TOKEN=`cat /tmp/sts.json | jq -r .Credentials.SessionToken`; export  AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY; export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
     rm -f /tmp/sts.json
 
