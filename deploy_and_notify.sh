@@ -20,7 +20,6 @@ elif [ $1 == 'production' ]; then
     python src/environment.py production
     pushd src && python install.py && popd
 fi
-# exit code??
 
 if [ $? -eq 0 ]; then
     export SL_COLOR="good"
@@ -34,5 +33,4 @@ fi
 
 curl -X POST --data-urlencode 'payload={"username": "One Garden", "icon_url": "'"$SL_ICON"'", "channel": "'"${CHANNEL:-#test}"'", "attachments": [{ "color": "'"$SL_COLOR"'", "text": "'"$SL_TEXT"'", "mrkdwn_in": ["text"] }] }' https://hooks.slack.com/services/${SLACK_HOOK}
 
-aws --region ap-northeast-1 lambda list-functions | jq -r .Functions[].FunctionName
 
