@@ -23,14 +23,14 @@ fi
 if [ $? -eq 0 ]; then
     export SL_COLOR="good"
     export SL_TEXT="Success: Deployed ${CIRCLE_BRANCH} (<${CIRCLE_COMPARE_URL}|${SHA1}>) by ${CIRCLE_USERNAME} !!"
-    export SL_ICON="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/AWS_Simple_Icons_Compute_AWSLambda.svg/150px-AWS_Simple_Icons_Compute_AWSLambda.svg.png"
+    export SL_ICON="https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2015-05-21/4984475810_da919f053253801b5ed9_34.jpg"
 else
     export SL_COLOR="danger"
     export SL_TEXT="Failure: Deploying ${CIRCLE_BRANCH} (<${CIRCLE_COMPARE_URL}|${SHA1}>) by ${CIRCLE_USERNAME} !!"
-    export SL_ICON="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/AWS_Simple_Icons_Compute_AWSLambda.svg/150px-AWS_Simple_Icons_Compute_AWSLambda.svg.png"
+    export SL_ICON="https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2015-05-21/4984475810_da919f053253801b5ed9_34.jpg"
 fi
 
-curl -X POST --data-urlencode 'payload={"username": "Elastic Beanstalk", "icon_url": "'"$SL_ICON"'", "channel": "'"${CHANNEL:-#test}"'", "attachments": [{ "color": "'"$SL_COLOR"'", "text": "'"$SL_TEXT"'", "mrkdwn_in": ["text"] }] }' https://hooks.slack.com/services/${SLACK_HOOK}
+curl -X POST --data-urlencode 'payload={"username": "One Garden", "icon_url": "'"$SL_ICON"'", "channel": "'"${CHANNEL:-#test}"'", "attachments": [{ "color": "'"$SL_COLOR"'", "text": "'"$SL_TEXT"'", "mrkdwn_in": ["text"] }] }' https://hooks.slack.com/services/${SLACK_HOOK}
 
 aws --region ap-northeast-1 lambda list-functions | jq -r .Functions[].FunctionName
 
