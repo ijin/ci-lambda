@@ -10,7 +10,9 @@ if [ $1 == 'staging' ]; then
     python src/environment.py staging
     pushd src && python install.py && popd
 elif [ $1 == 'production' ]; then
+    set +x
     aws sts assume-role --role-arn $STS_ROLE_PRODUCTION --role-session-name circleci > /tmp/sts.json; export AWS_ACCESS_KEY=`cat /tmp/sts.json | jq -r .Credentials.AccessKeyId`; export AWS_SECRET_KEY=`cat /tmp/sts.json | jq -r .Credentials.SecretAccessKey`; export AWS_SESSION_TOKEN=`cat /tmp/sts.json | jq -r .Credentials.SessionToken`; export  AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY; export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
+    set -x
     rm -f /tmp/sts.json
 
     export S3_BUCKET=$S3_BUCKET_PRODUCTION
