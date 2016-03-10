@@ -1,0 +1,24 @@
+{
+    "staging":{
+	"lambda_config": {
+	    "function_name": "SupportEnvironment",
+	    "handler": "sample.main",
+	    "description": "Test",
+	    "function_timeout": 40
+	},
+	"lambda_variable": {
+	    "version": "beta"
+	}
+    },
+    "production":{
+	"lambda_config": {
+	    "function_name": "SupportEnvironment",
+	    "handler": "sample.main",
+	    "description": "Prod",
+	    "function_timeout": 10
+	},
+	"lambda_variable": {
+	    "version": "1"
+	}
+    }
+}

@@ -1,0 +1,26 @@
+machine:
+  environment:
+    S3_BUCKET_STAGING: ci-lambda-staging
+    S3_BUCKET_PRODUCTION: ci-lambda-production
+    LAMBDA_EXEC_ROLE_STAGING: arn:aws:iam::713403314913:role/lambda_exec_role
+    LAMBDA_EXEC_ROLE_PRODUCTION: arn:aws:iam::908699337798:role/lambda_basic_execution
+    STS_ROLE_PRODUCTION: arn:aws:iam::908699337798:role/role-to-be-assumed
+dependencies:
+  pre:
+    - sudo apt-get update; sudo apt-get install jq
+    - pip install -r requirements.txt
+    #- python src/environment.py # should move this
+test:
+  pre:
+  override:
+    - echo "test"
+deployment:
+  qa:
+    branch: /develop/
+    commands:
+      - ~/deploy_and_notify.sh staging
+  deploy:
+    branch: /deploy/
+    commands:
+      - ~/deploy_and_notify.sh production
+
