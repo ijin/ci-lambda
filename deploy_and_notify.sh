@@ -19,7 +19,8 @@ elif [ $1 -eq 'production']; then
     pushd src && python install.py && popd
 fi
 # exit code??
-#lamvery deploy -s #$1
+
+aws --region ap-northeast-1 lambda list-functions | jq -r .Functions[].FunctionName
 
 if [ $? -eq 0 ]; then
     export SL_COLOR="good"
