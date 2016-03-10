@@ -18,9 +18,9 @@ deployment:
   qa:
     branch: /develop/
     commands:
-      - ~/deploy_and_notify.sh staging
+      - deploy_and_notify.sh staging
   deploy:
     branch: /deploy/
     commands:
-      - ~/deploy_and_notify.sh production
+      - deploy_and_notify.sh production
 
