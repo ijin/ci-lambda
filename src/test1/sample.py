@@ -5,4 +5,4 @@ import os, sys
 from environment import Env
 
 def main(event, context):
-    return Env(__file__).get('version')
+    return event['a']
