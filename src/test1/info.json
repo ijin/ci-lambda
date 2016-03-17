@@ -1,20 +1,20 @@
 {
     "staging":{
 	"lambda_config": {
-	    "function_name": "SupportEnvironment",
+	    "function_name": "SupportEnvironment1",
 	    "handler": "sample.main",
-	    "description": "Test",
+	    "description": "Test1",
 	    "function_timeout": 40
 	},
 	"lambda_variable": {
-	    "version": "beta"
+	    "version": "beta1"
 	}
     },
     "production":{
 	"lambda_config": {
-	    "function_name": "SupportEnvironment",
+	    "function_name": "SupportEnvironment1",
 	    "handler": "sample.main",
-	    "description": "Prod",
+	    "description": "Prod1",
 	    "function_timeout": 10
 	},
 	"lambda_variable": {
